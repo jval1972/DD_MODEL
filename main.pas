@@ -240,6 +240,7 @@ implementation
 uses
   mdl_filemenuhistory,
   optionsfrm,
+  SynUnicode,
   mdl_globals,
   mdl_utils,
   mdl_gl,
@@ -1185,6 +1186,8 @@ begin
   begin
     globals.changed := false;
     BackupFile(globals.ffilename);
+    globals.CodeEditor.Lines.SaveUnicode := False;
+    globals.CodeEditor.Lines.SaveFormat := sfAnsi;
     globals.CodeEditor.Lines.SaveToFile(globals.ffilename);
     globals.filemenuhistory.AddPath(globals.ffilename);
   end;

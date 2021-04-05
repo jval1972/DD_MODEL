@@ -160,6 +160,7 @@ uses
   SynHighlighterDDDecompile,
   SynHighlighterCDecompile,
   SynEditTypes,
+  SynUnicode,
   frm_ConfirmReplace,
   frm_GotoLine,
   frm_SearchText,
@@ -192,6 +193,8 @@ begin
   globals.CodeEditor.OnMouseWheelDown := Form1.FormMouseWheelDown;
   globals.CodeEditor.OnMouseWheelUp := Form1.FormMouseWheelUp;
   globals.CodeEditor.PopupMenu := EditorPopupMenu;
+  globals.CodeEditor.Lines.SaveUnicode := False;
+  globals.CodeEditor.Lines.SaveFormat := sfAnsi;
 
   globals.DecompilePascalMemo := TSynEdit.Create(Self);
   globals.DecompilePascalMemo.Parent := TabSheet2;
@@ -205,6 +208,8 @@ begin
   globals.DecompilePascalMemo.OnMouseWheelDown := Form1.FormMouseWheelDown;
   globals.DecompilePascalMemo.OnMouseWheelUp := Form1.FormMouseWheelUp;
   globals.DecompilePascalMemo.PopupMenu := DecompilePPopupMenu;
+  globals.DecompilePascalMemo.Lines.SaveUnicode := False;
+  globals.DecompilePascalMemo.Lines.SaveFormat := sfAnsi;
 
   globals.DecompileCLangMemo := TSynEdit.Create(Self);
   globals.DecompileCLangMemo.Parent := TabSheet3;
@@ -218,6 +223,8 @@ begin
   globals.DecompileCLangMemo.OnMouseWheelDown := Form1.FormMouseWheelDown;
   globals.DecompileCLangMemo.OnMouseWheelUp := Form1.FormMouseWheelUp;
   globals.DecompileCLangMemo.PopupMenu := DecompileCPopupMenu;
+  globals.DecompileCLangMemo.Lines.SaveUnicode := False;
+  globals.DecompileCLangMemo.Lines.SaveFormat := sfAnsi;
 
   SynEditRegexSearch1 := TSynEditRegexSearch.Create(Self);
   SynEditSearch1 := TSynEditSearch.Create(Self);
@@ -580,6 +587,8 @@ begin
   if SaveDialogP.Execute then
   begin
     BackupFile(SaveDialogP.FileName);
+    globals.DecompilePascalMemo.Lines.SaveUnicode := False;
+    globals.DecompilePascalMemo.Lines.SaveFormat := sfAnsi;
     globals.DecompilePascalMemo.Lines.SaveToFile(SaveDialogP.FileName);
   end;
 end;
@@ -589,7 +598,9 @@ begin
   if SaveDialogC.Execute then
   begin
     BackupFile(SaveDialogC.FileName);
-    globals.DecompilePascalMemo.Lines.SaveToFile(SaveDialogC.FileName);
+    globals.DecompileCLangMemo.Lines.SaveUnicode := False;
+    globals.DecompileCLangMemo.Lines.SaveFormat := sfAnsi;
+    globals.DecompileCLangMemo.Lines.SaveToFile(SaveDialogC.FileName);
   end;
 end;
 

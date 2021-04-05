@@ -249,7 +249,7 @@ object EditorForm: TEditorForm
         Top = 0
         Width = 647
         Height = 315
-        ActivePage = TabSheet3
+        ActivePage = TabSheet2
         Align = alClient
         Style = tsFlatButtons
         TabOrder = 0
