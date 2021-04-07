@@ -485,6 +485,8 @@ begin
 
   glRenderAxes;
 
+  glEnable(GL_TEXTURE_2D);
+
   glBindTexture(GL_TEXTURE_2D, bitmaptexture);
   glColor3f(1.0, 1.0, 1.0);
 
