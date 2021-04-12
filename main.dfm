@@ -601,6 +601,16 @@ object Form1: TForm1
         FFFFFFFFFFFFFFFFFF00}
       OnClick = Options1Click
     end
+    object Button1: TButton
+      Left = 216
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = 'Button1'
+      TabOrder = 0
+      Visible = False
+      OnClick = Button1Click
+    end
   end
   object SavePictureDialog1: TSavePictureDialog
     DefaultExt = 'bmp'

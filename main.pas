@@ -120,6 +120,7 @@ type
     Export1: TMenuItem;
     OpenDialog2: TOpenDialog;
     Import1: TMenuItem;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure PaintBox1Paint(Sender: TObject);
     procedure OpenGLPanelResize(Sender: TObject);
@@ -192,6 +193,7 @@ type
     procedure Window1Click(Sender: TObject);
     procedure Export1Click(Sender: TObject);
     procedure Import1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     procedure Idle(Sender: TObject; var Done: Boolean);
@@ -1632,6 +1634,63 @@ begin
     DoOpenDMXFile(OpenDialog2.FileName);
     ResetCamera;
   end;
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  b: TBitmap;
+  b2: TBitmap;
+  i: integer;
+  sname: string;
+begin
+  b2 := TBitmap.Create;
+  b2.PixelFormat := pf24bit;
+  b2.Width := 192;
+  b2.Height := 254;
+  for i := 0 to globals.mdl.Frames.Count - 1 do
+  begin
+    SetCurrentFrame(i);
+    SetCurrentFrame(i);
+    if i < 9 then
+      sname := 'F:\BL0' + IntToStr(i + 1) + '.bmp'
+    else
+      sname := 'F:\BL' + IntToStr(i + 1) + '.bmp';
+    b := TBitmap.Create;
+    try
+      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+      glFinish;
+    SetCurrentFrame(i);
+      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+      glFinish;
+
+    SetCurrentFrame(i);
+      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+      glFinish;
+
+    SetCurrentFrame(i);
+      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+      glFinish;
+
+    SetCurrentFrame(i);
+      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+      glFinish;
+
+    SetCurrentFrame(i);
+      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+      glFinish;
+
+      InvalidatePaintBox;
+      sleep(1);
+      Get3dPreviewBitmap(b);
+      b.Height := 256;
+      b2.Canvas.CopyRect(Rect(0, 0, 192, 254), b.Canvas, Rect(160, 2, 352, 256));
+//      BackupFile(sname);
+      b2.SaveToFile(sname);
+    finally
+      b.Free;
+    end;
+  end;
+  b2.Free;
 end;
 
 end.
