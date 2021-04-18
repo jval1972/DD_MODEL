@@ -81,7 +81,8 @@ uses
   frm_ReplaceText in 'frm_ReplaceText.pas' {TextReplaceDialog},
   SynEditRegexSearch in 'SynEdit\SynEditRegexSearch.pas',
   SynEditSearch in 'SynEdit\SynEditSearch.pas',
-  SynHighlighterCDecompile in 'SynEdit\SynHighlighterCDecompile.pas';
+  SynHighlighterCDecompile in 'SynEdit\SynHighlighterCDecompile.pas',
+  mdl_pk3writer in 'mdl_pk3writer.pas';
 
 {$R *.res}
 

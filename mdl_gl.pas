@@ -51,6 +51,9 @@ procedure glEndScene(dc: HDC);
 procedure gld_CreateTexture(const b: TBitmap);
 procedure gld_ShutDownTexture;
 
+const
+  TEXTURESIZE = 1024;
+
 type
   TCDCamera = record
     x, y, z: glfloat;
@@ -128,9 +131,6 @@ end;
 type
   PLongWordArray = ^TLongWordArray;
   TLongWordArray = array[0..$FFFF] of LongWord;
-
-const
-  TEXTURESIZE = 1024;
 
 var
   actualltexsize: Integer = 0;

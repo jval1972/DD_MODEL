@@ -120,7 +120,8 @@ type
     Export1: TMenuItem;
     OpenDialog2: TOpenDialog;
     Import1: TMenuItem;
-    Button1: TButton;
+    PK3Button1: TSpeedButton;
+    SavePK3Dialog: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure PaintBox1Paint(Sender: TObject);
     procedure OpenGLPanelResize(Sender: TObject);
@@ -193,9 +194,10 @@ type
     procedure Window1Click(Sender: TObject);
     procedure Export1Click(Sender: TObject);
     procedure Import1Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure PK3Button1Click(Sender: TObject);
   private
     { Private declarations }
+    devparm: boolean;
     procedure Idle(Sender: TObject; var Done: Boolean);
     procedure Hint(Sender: TObject);
     procedure DoRenderGL2D;
@@ -249,15 +251,36 @@ uses
   mdl_defs,
   mdl_model,
   mdl_script_functions,
-  frm_editor,
+  mdl_pk3writer,
+  frm_preview,
   frm_texture,
-  frm_mask,
-  frm_preview;
+  frm_editor,
+  frm_mask;
+
+function CheckParam(const parm: string): integer;
+var
+  i: integer;
+  uParm: string;
+begin
+  uParm := UpperCase(parm);
+  for i := 1 to ParamCount do
+    if UpperCase(ParamStr(i)) = uParm then
+    begin
+      Result := i;
+      Exit;
+    end;
+  Result := -1;
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   Scaled := False;
   globals.mdl := TDDModelLoader.Create;
+
+  devparm := CheckParam('-devparm') > 0;
+  PK3Button1.Visible := devparm;
+  if not PK3Button1.Visible then
+    AboutButton1.Left := PK3Button1.Left;
 
   DecimalSeparator := '.';
 
@@ -1013,8 +1036,8 @@ begin
       z := camera.z - 0.5;
       z := z / 0.99;
       camera.z := z + 0.5;
-      if camera.z < -6.0 then
-        camera.z := -6.0;
+      if camera.z < -15.0 then
+        camera.z := -15.0;
       globals.glneedrefresh := True;
       Handled := True;
     end;
@@ -1636,61 +1659,97 @@ begin
   end;
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.PK3Button1Click(Sender: TObject);
 var
   b: TBitmap;
   b2: TBitmap;
   i: integer;
   sname: string;
+  pk3: TPK3Writer;
+  ms: TMemoryStream;
 begin
-  b2 := TBitmap.Create;
-  b2.PixelFormat := pf24bit;
-  b2.Width := 192;
-  b2.Height := 254;
-  for i := 0 to globals.mdl.Frames.Count - 1 do
-  begin
-    SetCurrentFrame(i);
-    SetCurrentFrame(i);
-    if i < 9 then
-      sname := 'F:\BL0' + IntToStr(i + 1) + '.bmp'
-    else
-      sname := 'F:\BL' + IntToStr(i + 1) + '.bmp';
-    b := TBitmap.Create;
-    try
-      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
-      glFinish;
-    SetCurrentFrame(i);
-      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
-      glFinish;
+  if not SavePK3Dialog.Execute then
+    Exit;
 
-    SetCurrentFrame(i);
-      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
-      glFinish;
+  pk3 := TPK3Writer.Create;
 
-    SetCurrentFrame(i);
-      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
-      glFinish;
-
-    SetCurrentFrame(i);
-      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
-      glFinish;
-
-    SetCurrentFrame(i);
-      DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
-      glFinish;
-
-      InvalidatePaintBox;
-      sleep(1);
-      Get3dPreviewBitmap(b);
-      b.Height := 256;
-      b2.Canvas.CopyRect(Rect(0, 0, 192, 254), b.Canvas, Rect(160, 2, 352, 256));
-//      BackupFile(sname);
-      b2.SaveToFile(sname);
-    finally
-      b.Free;
+  Screen.Cursor := crHourglass;
+  try
+    b2 := TBitmap.Create;
+    b2.PixelFormat := pf24bit;
+    b2.Width := 192;
+    b2.Height := 254;
+    if TEXTURESIZE = 1024 then
+    begin
+      b2.Width := b2.Width * 2;
+      b2.Height := b2.Height * 2;
     end;
+    for i := 0 to globals.mdl.Frames.Count - 1 do
+    begin
+      SetCurrentFrame(i);
+      SetCurrentFrame(i);
+      if i < 9 then
+        sname := 'F00' + IntToStr(i + 1) + 'A0.bmp'
+      else if i < 99 then
+        sname := 'F0' + IntToStr(i + 1) + 'A0.bmp'
+      else
+        sname := 'F' + IntToStr(i + 1) + 'A0.bmp';
+
+      b := TBitmap.Create;
+      try
+        DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+        glFinish;
+
+        SetCurrentFrame(i);
+        DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+        glFinish;
+
+        SetCurrentFrame(i);
+        DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+        glFinish;
+
+        SetCurrentFrame(i);
+        DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+        glFinish;
+
+        SetCurrentFrame(i);
+        DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+        glFinish;
+
+        SetCurrentFrame(i);
+        DoRenderGL3D; // JVAL: For some unknown reason this must be called before glReadPixels
+        glFinish;
+
+        InvalidatePaintBox;
+        sleep(1);
+
+        Get3dPreviewBitmap(b);
+        if TEXTURESIZE = 1024 then
+        begin
+          b.Height := 512;
+          b2.Canvas.CopyRect(Rect(0, 0, 2 * 192, 2 * 254), b.Canvas, Rect(2 * 160, 2 * 2, 2 * 352, 2 * 256));
+        end
+        else
+        begin
+          b.Height := 256;
+          b2.Canvas.CopyRect(Rect(0, 0, 192, 254), b.Canvas, Rect(160, 2, 352, 256));
+        end;
+
+        ms := TMemoryStream.Create;
+        b2.SaveToStream(ms);
+        AddBinaryDataToPK3(pk3, sname, ms.Memory, ms.Size);
+        ms.Free;
+      finally
+        b.Free;
+      end;
+    end;
+    b2.Free;
+    BackupFile(SavePK3Dialog.FileName);
+    pk3.SaveToFile(SavePK3Dialog.FileName);
+  finally
+    Screen.Cursor := crDefault;
   end;
-  b2.Free;
+  pk3.Free;
 end;
 
 end.

@@ -100,7 +100,7 @@ Conditionals=
 DebugSourceDirs=
 UsePackages=0
 [Parameters]
-RunParams=
+RunParams=-devparm
 HostApplication=
 Launcher=
 UseLauncher=0
@@ -113,9 +113,9 @@ RootDir=
 IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=1
-MinorVer=0
+MinorVer=1
 Release=4
-Build=29
+Build=31
 Debug=0
 PreRelease=0
 Special=0
@@ -126,13 +126,13 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Jim Valavanis
 FileDescription=DelphiDOOM Procedural Modeler
-FileVersion=1.0.4.29
+FileVersion=1.1.4.31
 InternalName=DD_MODEL
 LegalCopyright=© 2017 - 2021, Jim Valavanis
 LegalTrademarks=© 2017 - 2021, Jim Valavanis
 OriginalFilename=DD_MODEL.exe
 ProductName=DD_MODEL
-ProductVersion=1.0.0.0
+ProductVersion=1.1
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
