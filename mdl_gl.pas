@@ -157,6 +157,7 @@ begin
     texsize := TEXTURESIZE;
 
   actualltexsize := texsize;
+  texsize := texsize * 2;
 
   tmp := TBitmap.Create;
   tmp.Width := texsize;
