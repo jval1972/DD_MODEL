@@ -1624,7 +1624,7 @@ end;
 
 procedure TForm1.MainToolbarPanelResize(Sender: TObject);
 begin
-  ExitButton1.Left := MainToolbarPanel.Width - 40; 
+  ExitButton1.Left := MainToolbarPanel.Width - 40;
 end;
 
 procedure TForm1.Window1Click(Sender: TObject);

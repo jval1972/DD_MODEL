@@ -1649,7 +1649,7 @@ begin
     TObject(fList[Dummy]).Free;
 
   FreeAndNil(fList);
-  
+
   inherited;
 end;
 

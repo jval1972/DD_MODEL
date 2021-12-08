@@ -220,42 +220,42 @@ uses
 
 const
   KeyWords: array[0..94] of UnicodeString = (
-    '__asm', '__automated', '__cdecl', '__classid', '__closure', '__declspec', 
-    '__dispid', '__except', '__export', '__fastcall', '__finally', '__import', 
-    '__int16', '__int32', '__int64', '__int8', '__pascal', '__property', 
-    '__published', '__rtti', '__stdcall', '__thread', '__try', '_asm', '_cdecl', 
-    '_export', '_fastcall', '_import', '_pascal', '_stdcall', 'asm', 'auto', 
-    'bool', 'break', 'case', 'catch', 'cdecl', 'char', 'class', 'const', 
-    'const_cast', 'continue', 'default', 'delete', 'do', 'double', 
-    'dynamic_cast', 'else', 'enum', 'explicit', 'extern', 'false', 'float', 
-    'for', 'friend', 'goto', 'if', 'inline', 'int', 'interface', 'long', 
-    'mutable', 'namespace', 'new', 'operator', 'pascal', 'private', 'protected', 
-    'public', 'register', 'reinterpret_cast', 'return', 'short', 'signed', 
-    'sizeof', 'static', 'static_cast', 'struct', 'switch', 'template', 'this', 
-    'throw', 'true', 'try', 'typedef', 'typeid', 'typename', 'union', 
+    '__asm', '__automated', '__cdecl', '__classid', '__closure', '__declspec',
+    '__dispid', '__except', '__export', '__fastcall', '__finally', '__import',
+    '__int16', '__int32', '__int64', '__int8', '__pascal', '__property',
+    '__published', '__rtti', '__stdcall', '__thread', '__try', '_asm', '_cdecl',
+    '_export', '_fastcall', '_import', '_pascal', '_stdcall', 'asm', 'auto',
+    'bool', 'break', 'case', 'catch', 'cdecl', 'char', 'class', 'const',
+    'const_cast', 'continue', 'default', 'delete', 'do', 'double',
+    'dynamic_cast', 'else', 'enum', 'explicit', 'extern', 'false', 'float',
+    'for', 'friend', 'goto', 'if', 'inline', 'int', 'interface', 'long',
+    'mutable', 'namespace', 'new', 'operator', 'pascal', 'private', 'protected',
+    'public', 'register', 'reinterpret_cast', 'return', 'short', 'signed',
+    'sizeof', 'static', 'static_cast', 'struct', 'switch', 'template', 'this',
+    'throw', 'true', 'try', 'typedef', 'typeid', 'typename', 'union',
     'unsigned', 'using', 'virtual', 'void', 'volatile', 'wchar_t', 'while'
   );
 
   KeyIndices: array[0..342] of Integer = (
-    -1, 34, -1, -1, 57, 72, -1, 39, -1, 9, -1, 86, -1, -1, -1, -1, -1, -1, -1, 
-    -1, -1, 88, -1, 12, 66, -1, -1, -1, -1, -1, 42, -1, -1, -1, -1, -1, 56, 51, 
-    40, 87, 77, -1, -1, -1, -1, 64, -1, -1, -1, -1, -1, -1, -1, -1, -1, 28, 41, 
-    -1, 63, 6, -1, -1, -1, -1, -1, -1, -1, -1, 55, 65, 0, -1, -1, -1, -1, -1, 
-    -1, 26, 83, -1, 38, 92, -1, -1, 93, 33, -1, -1, -1, -1, -1, -1, -1, 35, -1, 
-    -1, -1, -1, -1, -1, -1, 79, 27, -1, -1, -1, 43, -1, -1, 20, -1, -1, 31, -1, 
-    -1, -1, -1, -1, 89, -1, -1, -1, -1, 59, -1, 58, -1, -1, 46, -1, -1, 3, -1, 
-    -1, 17, -1, 54, -1, 45, -1, -1, -1, -1, -1, -1, 53, -1, -1, -1, 1, -1, -1, 
-    -1, -1, 44, 90, 32, -1, -1, -1, -1, -1, -1, 91, 13, -1, -1, -1, 60, -1, -1, 
-    -1, -1, -1, 49, -1, -1, -1, -1, -1, -1, 75, -1, -1, 76, -1, -1, -1, -1, 30, 
-    68, 23, 82, -1, 15, -1, -1, 2, -1, 70, -1, -1, -1, 73, 18, -1, -1, -1, -1, 
-    -1, 47, 24, 52, 14, 84, -1, -1, -1, -1, -1, 25, -1, -1, -1, 80, 69, -1, -1, 
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 21, -1, 19, -1, -1, -1, 
-    -1, -1, -1, 74, -1, -1, -1, 29, -1, -1, -1, 67, -1, 7, -1, -1, -1, 50, 61, 
-    -1, -1, -1, 4, -1, 94, 85, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
-    81, -1, -1, -1, -1, -1, 10, 16, -1, -1, 36, 37, -1, -1, -1, 8, -1, 22, -1, 
+    -1, 34, -1, -1, 57, 72, -1, 39, -1, 9, -1, 86, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, 88, -1, 12, 66, -1, -1, -1, -1, -1, 42, -1, -1, -1, -1, -1, 56, 51,
+    40, 87, 77, -1, -1, -1, -1, 64, -1, -1, -1, -1, -1, -1, -1, -1, -1, 28, 41,
+    -1, 63, 6, -1, -1, -1, -1, -1, -1, -1, -1, 55, 65, 0, -1, -1, -1, -1, -1,
+    -1, 26, 83, -1, 38, 92, -1, -1, 93, 33, -1, -1, -1, -1, -1, -1, -1, 35, -1,
+    -1, -1, -1, -1, -1, -1, 79, 27, -1, -1, -1, 43, -1, -1, 20, -1, -1, 31, -1,
+    -1, -1, -1, -1, 89, -1, -1, -1, -1, 59, -1, 58, -1, -1, 46, -1, -1, 3, -1,
+    -1, 17, -1, 54, -1, 45, -1, -1, -1, -1, -1, -1, 53, -1, -1, -1, 1, -1, -1,
+    -1, -1, 44, 90, 32, -1, -1, -1, -1, -1, -1, 91, 13, -1, -1, -1, 60, -1, -1,
+    -1, -1, -1, 49, -1, -1, -1, -1, -1, -1, 75, -1, -1, 76, -1, -1, -1, -1, 30,
+    68, 23, 82, -1, 15, -1, -1, 2, -1, 70, -1, -1, -1, 73, 18, -1, -1, -1, -1,
+    -1, 47, 24, 52, 14, 84, -1, -1, -1, -1, -1, 25, -1, -1, -1, 80, 69, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 21, -1, 19, -1, -1, -1,
+    -1, -1, -1, 74, -1, -1, -1, 29, -1, -1, -1, 67, -1, 7, -1, -1, -1, 50, 61,
+    -1, -1, -1, 4, -1, 94, 85, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    81, -1, -1, -1, -1, -1, 10, 16, -1, -1, 36, 37, -1, -1, -1, 8, -1, 22, -1,
     -1, -1, -1, 78, 62, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1, 71, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, 11, -1, 48, 
-    -1 
+    -1, -1, -1, -1, 71, -1, -1, -1, 5, -1, -1, -1, -1, -1, -1, -1, 11, -1, 48,
+    -1
   );
 
 {$Q-}
@@ -928,7 +928,7 @@ begin
     Inc(Run);
   end; // while
   if IsAlphaUncerscore(Run) then
-    fTokenID := tkUnknown;   
+    fTokenID := tkUnknown;
 end;
 
 procedure TSynCDecompileHightlighter.OrSymbolProc;

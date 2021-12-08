@@ -228,7 +228,7 @@ begin
 
   SynEditRegexSearch1 := TSynEditRegexSearch.Create(Self);
   SynEditSearch1 := TSynEditSearch.Create(Self);
-  
+
   PageControl1.ActivePageIndex := 0;
 
   @outproc := @outprocmemo;
